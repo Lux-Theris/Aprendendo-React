@@ -1,0 +1,71 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Orbitron;
+}
+
+body{
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  background-color: black;
+  color: rgb(255, 0, 0);
+}
+
+main{
+  width: 500px;
+  margin: 50px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 20px goldenrod;
+
+}
+
+.container{
+  /* width: 90%; */
+  font-size: 20px;
+  outline: none;
+  border: none;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: left;
+}
+
+input, button{
+  padding: 10px;
+  font-size: 20px;
+  outline: none;
+  border: none;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+button{
+  height: 100%;
+  width: 100%;
+  background-color: red;
+  color: white;
+
+  /*background: red; For browsers that do not support gradients
+  background: -webkit-linear-gradient(left, red, orange , yellow, green, cyan, blue, violet);
+  background: -o-linear-gradient(right,red,  orange, yellow, green, cyan, blue, violet); /
+  background: -moz-linear-gradient(right, red,  orange, yellow, green, cyan, blue, violet); 
+  background: linear-gradient(to right, red, orange , yellow, green, cyan, blue, violet);*/
+  cursor: pointer;
+}
+
+@media (max-width: 500px){
+  body, input, button {
+    font-size: 12px;
+  }
+}

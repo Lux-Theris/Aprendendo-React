@@ -1,4 +1,11 @@
-.header{
-  background: #ffbb00;
-  height: 80px;
+.header {
+  background: blueviolet;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header img {
+  height: 2rem;
+  margin-right: 1rem;
 }

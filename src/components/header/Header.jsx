@@ -1,8 +1,12 @@
 import styles from './header.module.css'
+
+import logo from '../../assets/logo.svg'
+
 export function Header() {
   return (
-    <div className={styles.header}>
-      <h1>Header</h1>
-    </div>
+    <header className={styles.header}>
+      <img src={logo} alt="" />
+      <strong>Vem Ser Dev FeedTheBeast</strong>
+    </header>
   )
 }

@@ -1,6 +1,15 @@
+import { Comment } from '../comment/Comment'
 import styles from './post.module.css'
+import { useState } from 'react'
 
 export function Post() {
+  const [InputValue, setInputValue] = useState('')
+  const handleSubmit = (data) => {
+    alert(data.target.value)
+  }
+  const getInputValue = (event) => {
+    setInputValue(event.target.value)
+  }
   return (
     <article className={styles.container}>
       <header className={styles.header}>
@@ -33,7 +42,7 @@ export function Post() {
       <time title="14 de maio de 2024" dateTime="2024-05-14 08:00:00">
         Publicado há 8 horas
       </time>
-      <form className={styles.commentForm}>
+      <form className={styles.commentForm} onSubmit={handleSubmit}>
         <div>
           <img
             className={styles.imgAuthor}
@@ -41,13 +50,22 @@ export function Post() {
             alt="NaN"
           />
         </div>
-        <div>
-          <textarea placeholder="Deixe seu comentário"></textarea>
+        <div className={styles.comment}>
+          <textarea
+            placeholder="Deixe seu comentário"
+            value={InputValue}
+            onChange={(event) => setInputValue(event.target.value)}
+          ></textarea>
           <footer>
             <button type="submit"> Publicar</button>
           </footer>
         </div>
       </form>
+      <div className={styles.commentList}>
+        <Comment />
+        <Comment />
+        <Comment />
+      </div>
     </article>
   )
 }

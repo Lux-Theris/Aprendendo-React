@@ -33,7 +33,7 @@ text-align: left;
 }
 .imgPost{
   align-items: center;
-  width: 40rem;
+  max-width: 30rem;
   text-align: center;
 }
 .header{
@@ -70,10 +70,11 @@ text-align: left;
   border-top: 1px solid var(--gray-400);
   text-align: left;
   display: flex;
+  align-items: flex-start;
 }
 
 .commentForm textarea{
-  width: 200%;
+ width: 100%;
   background: var(--gray-100);
   border: 0;
   resize: none;
@@ -81,7 +82,6 @@ text-align: left;
   padding: 1rem;
   border-radius: 8px;
   line-height: 1.4rem;
-  margin-top: 1rem;
 }
 .commentForm button[type=submit]{
   padding: 1rem 1.5rem;
@@ -104,4 +104,11 @@ background: var(--blue-500);
 .commentForm:focus-within footer{
   visibility: visible;
   max-height: none;
+}
+.commentList{
+margin-top: 2rem;
+}
+.comment{
+  flex: 1;
+  margin-left: 1rem;
 }

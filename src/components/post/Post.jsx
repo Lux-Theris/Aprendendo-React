@@ -1,32 +1,48 @@
+/* eslint-disable array-callback-return */
+import { Avatar } from '../avatar/Avatar'
 import { Comment } from '../comment/Comment'
 import styles from './post.module.css'
 import { useState } from 'react'
+import { format, formatDistanceToNow } from 'date-fns'
+import ptBR from 'date-fns/locale/pt-BR'
 
-export function Post() {
+export function Post(props) {
+  const { author, content, publishedAt } = props
+  const publishedAtFormated = format(publishedAt, "d 'de' LLLL 'de' yyy", {
+    locale: ptBR,
+  })
+  const DistanceToNowFormated = formatDistanceToNow(publishedAt, {
+    locale: ptBR,
+    addSuffix: true,
+  })
   const [InputValue, setInputValue] = useState('')
   const handleSubmit = (data) => {
     alert(data.target.value)
   }
-  const getInputValue = (event) => {
-    setInputValue(event.target.value)
-  }
+
   return (
     <article className={styles.container}>
       <header className={styles.header}>
         <div className={styles.author}>
-          <img
-            className={styles.imgAuthor}
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Overwatch_circle_logo.svg/600px-Overwatch_circle_logo.svg.png"
-            alt="NaN"
-          />
+          <Avatar src={author.avatarurl} hasborder />
           <div className={styles.authorInfo}>
-            <strong>OverWatch</strong>
-            <span>Free to Play Game</span>
+            <strong>{author.name}</strong>
+            <span>{author.role}</span>
           </div>
         </div>
       </header>
       <div className={styles.content}>
-        <p>O mundo precisa de heróis</p>
+        {content.map((line) => {
+          if (line.type === 'paragraph') {
+            return <p key={Math.random()}>{line.content}</p>
+          } else if (line.type === 'link') {
+            return (
+              <p key={Math.random()}>
+                <a href="#">{line.content}</a>
+              </p>
+            )
+          }
+        })}
         <p>Venha se tornar um herói hoje mesmo. Junte-se a overwatch</p>
         <p className={styles.link}>
           <a href="https://overwatch.blizzard.com/pt-br/">Jogue já</a>
@@ -39,16 +55,12 @@ export function Post() {
           />
         </p>
       </div>
-      <time title="14 de maio de 2024" dateTime="2024-05-14 08:00:00">
-        Publicado há 8 horas
+      <time title={publishedAtFormated} dateTime="2024-05-14 08:00:00">
+        {DistanceToNowFormated}
       </time>
       <form className={styles.commentForm} onSubmit={handleSubmit}>
         <div>
-          <img
-            className={styles.imgAuthor}
-            src="https://github.com/Lux-Theris.png"
-            alt="NaN"
-          />
+          <Avatar src="https://github.com/Lux-Theris.png" />
         </div>
         <div className={styles.comment}>
           <textarea
@@ -62,8 +74,6 @@ export function Post() {
         </div>
       </form>
       <div className={styles.commentList}>
-        <Comment />
-        <Comment />
         <Comment />
       </div>
     </article>

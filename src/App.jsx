@@ -28,7 +28,12 @@ export function App() {
         },
         {
           type: 'link',
+          url: 'https://overwatch.blizzard.com/pt-br/',
           content: 'Jogue Já',
+        },
+        {
+          type: 'img',
+          url: 'https://blz-contentstack-images.akamaized.net/v3/assets/bltf408a0557f4e4998/blt030bf3d606661d3c/633f5be164fe5a7d4481a16c/overwatch-section1-feature1.png',
         },
       ],
     },

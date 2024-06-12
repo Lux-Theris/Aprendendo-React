@@ -16,8 +16,30 @@ export function Post(props) {
     addSuffix: true,
   })
   const [InputValue, setInputValue] = useState('')
-  const handleSubmit = (data) => {
-    alert(data.target.value)
+  const [comments, setComments] = useState([])
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    setComments([
+      ...comments,
+      {
+        name: 'Angela Ziegler',
+        avatarurl: '',
+        comment: InputValue,
+        createdAt: new Date(),
+      },
+    ])
+    setInputValue('')
+  }
+
+  const getInputValue = (event) => {
+    setInputValue(event.target.value)
+  }
+
+  const deleteComment = (commentToBeDeleted) => {
+    const filteredComments = comments.filter((comment) => {
+      if (comment !== commentToBeDeleted) return comment
+    })
+    setComments(filteredComments)
   }
 
   return (
@@ -38,24 +60,22 @@ export function Post(props) {
           } else if (line.type === 'link') {
             return (
               <p key={Math.random()}>
-                <a href="#">{line.content}</a>
+                <a href={line.url}>{line.content}</a>
               </p>
+            )
+          } else if (line.type === 'img') {
+            return (
+              <img
+                key={Math.random()}
+                className={styles.imgPost}
+                src={line.url}
+                alt=""
+              />
             )
           }
         })}
-        <p>Venha se tornar um herói hoje mesmo. Junte-se a overwatch</p>
-        <p className={styles.link}>
-          <a href="https://overwatch.blizzard.com/pt-br/">Jogue já</a>
-        </p>
-        <p>
-          <img
-            className={styles.imgPost}
-            src="https://blz-contentstack-images.akamaized.net/v3/assets/bltf408a0557f4e4998/blt030bf3d606661d3c/633f5be164fe5a7d4481a16c/overwatch-section1-feature1.png"
-            alt=""
-          />
-        </p>
       </div>
-      <time title={publishedAtFormated} dateTime="2024-05-14 08:00:00">
+      <time title={publishedAtFormated} dateTime={publishedAtFormated}>
         {DistanceToNowFormated}
       </time>
       <form className={styles.commentForm} onSubmit={handleSubmit}>
@@ -66,7 +86,7 @@ export function Post(props) {
           <textarea
             placeholder="Deixe seu comentário"
             value={InputValue}
-            onChange={(event) => setInputValue(event.target.value)}
+            onChange={getInputValue}
           ></textarea>
           <footer>
             <button type="submit"> Publicar</button>
@@ -74,7 +94,13 @@ export function Post(props) {
         </div>
       </form>
       <div className={styles.commentList}>
-        <Comment />
+        {comments.map((comment) => (
+          <Comment
+            key={Math.random()}
+            comment={comment}
+            deleteComment={deleteComment}
+          />
+        ))}
       </div>
     </article>
   )

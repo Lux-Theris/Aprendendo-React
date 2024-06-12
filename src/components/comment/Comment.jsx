@@ -1,25 +1,42 @@
 import { ThumbsDown, ThumbsUp, Trash } from 'phosphor-react'
 import styles from './comment.module.css'
 import { Avatar } from '../avatar/Avatar'
+import { format, formatDistanceToNow } from 'date-fns'
+import ptBR from 'date-fns/locale/pt-BR'
 
-export function Comment() {
+export function Comment(props) {
+  const { comment, deleteComment } = props
+  const publishedAtFormated = format(
+    comment.createdAt,
+    "d 'de' LLLL 'de' yyy",
+    {
+      locale: ptBR,
+    },
+  )
+  const DistanceToNowFormated = formatDistanceToNow(comment.createdAt, {
+    locale: ptBR,
+    addSuffix: true,
+  })
   return (
     <div className={styles.comment}>
-      <Avatar src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxryT9TmdfamTFzTYgIrzBIYfGJGrUwOV-RPt3YyhjJw&s" />
+      <Avatar src={comment.avatarurl} />
       <div className={styles.contentBox}>
         <div className={styles.commentContent}>
           <header>
             <div className={styles.authorAndTime}>
-              <strong>Angela Ziegler</strong>
-              <time title="24 de Outubro de 3025" dateTime="3025-10-24">
-                Em mil anos
+              <strong>{comment.name}</strong>
+              <time title={comment.createdAt} dateTime="2024-05-14 08:00:00">
+                {DistanceToNowFormated}
               </time>
             </div>
-            <button title="Excluir Comentário">
+            <button
+              title="Excluir Comentário"
+              onClick={() => deleteComment(comment)}
+            >
               <Trash size={24} />
             </button>
           </header>
-          <p>Heróis nunca morrem! Por um preço &#128520;</p>
+          <p>{comment.comment}</p>
         </div>
         <footer>
           <button>

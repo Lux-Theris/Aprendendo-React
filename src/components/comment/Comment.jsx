@@ -25,9 +25,7 @@ export function Comment(props) {
           <header>
             <div className={styles.authorAndTime}>
               <strong>{comment.name}</strong>
-              <time title={comment.createdAt} dateTime="2024-05-14 08:00:00">
-                {DistanceToNowFormated}
-              </time>
+              <time title={publishedAtFormated}>{DistanceToNowFormated}</time>
             </div>
             <button
               title="Excluir Comentário"
